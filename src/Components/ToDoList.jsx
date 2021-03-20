@@ -2,16 +2,11 @@ import React from "react";
 
 
 function ToDoList(props) {
-    let tasks = [
-        {id: 1, taskText: 'Написать проект на реакте', isDone: false},
-        {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: false},
-        {id: 3, taskText: 'Систематизировать знания', isDone: false},
-    ]
-    let tasksElements = tasks.map(t => (<Task id={t.id} taskText={t.taskText} isDone={t.isDone}/>))
+    let tasksElements = props.tasks.map(t => (<Task id={t.id} taskText={t.taskText} isDone={t.isDone}/>))
     return (
         <div className="wrapper">
             <header>Todo App</header>
-            <ToDoInput/>
+            <ToDoInput addTask={props.addTask}/>
             <ul className="todoList">
             {tasksElements}
             </ul>
@@ -27,17 +22,25 @@ function ToDoList(props) {
 }
 
 function ToDoInput(props) {
+    let newTextTask = React.createRef()
+    let addTask = () => {
+        let text = newTextTask.current.value
+        props.addTask(text)
+    }
     return (
         <div className="inputField">
-            <input type="text" placeholder="Add your new todo"/>
-            <button><i className="fas fa-plus">+</i></button>
+            <input type="text" placeholder="Add your new todo" ref={newTextTask}/>
+            <button className={"fas fa-plus"} onClick={addTask}><i >+</i></button>
         </div>
     )
 }
 
 function Task(props) {
     return (
-        <li>{props.taskText}</li>
+        <li>
+            <input className="input_checkbox" type="checkbox" checked={props.isDone}/>
+            {props.taskText}
+        </li>
     )
 }
 

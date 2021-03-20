@@ -2,9 +2,9 @@ import './App.css';
 import React from "react";
 import ToDoList from "./Components/ToDoList";
 
-function App() {
+function App(props) {
     return (
-        <ToDoList/>
+        <ToDoList tasks={props.state.tasks} addTask={props.addTask}/>
     )
 }
 
