@@ -2,7 +2,6 @@ const ADD_TASK = 'todo/ADD-TASK';
 const DELETE_TASK = 'todo/DELETE-TASK';
 
 
-
 let initialState = {
    tasks: [
         {id: 1, taskText: 'Написать проект на реакте', isDone: false},
