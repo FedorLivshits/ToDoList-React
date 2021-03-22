@@ -4,7 +4,7 @@ import ToDoList from "./Components/ToDoList";
 
 function App(props) {
     return (
-        <ToDoList tasks={props.state.tasks} addTask={props.addTask}/>
+        <ToDoList state={props.state} dispatch={props.dispatch}/>
     )
 }
 

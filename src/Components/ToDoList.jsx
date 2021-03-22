@@ -1,19 +1,27 @@
 import React from "react";
+import {addTaskAC, clearAllTasksAC, updateInputTaskAC} from "../redux/state";
 
 
 function ToDoList(props) {
-    let tasksElements = props.tasks.map(t => (<Task id={t.id} taskText={t.taskText} isDone={t.isDone}/>))
+    let tasksElements = props.state.tasks.map(t => (<Task id={t.id} taskText={t.taskText} isDone={t.isDone}/>))
+    let clearAll = () => {
+        props.dispatch(clearAllTasksAC())
+    }
     return (
         <div className="wrapper">
             <header>Todo App</header>
-            <ToDoInput addTask={props.addTask}/>
+            <ToDoInput dispatch={props.dispatch} taskInput={props.state.taskInput}/>
             <ul className="todoList">
-            {tasksElements}
+                {tasksElements}
             </ul>
             <div className="footer">
-                <span>You have <span className="pendingTasks">
-                </span>pending tasks</span>
-                <button>Clear All</button>
+                <ul className="breadcrumb">
+                    <li>All</li>
+                    <li><a href="#">In progress</a></li>
+                    <li><a href="#">Done</a></li>
+                </ul>
+                <button onClick={clearAll}>Clear All</button>
+
             </div>
         </div>
 
@@ -24,13 +32,16 @@ function ToDoList(props) {
 function ToDoInput(props) {
     let newTextTask = React.createRef()
     let addTask = () => {
+        props.dispatch(addTaskAC())
+    }
+    let onInputChange = () => {
         let text = newTextTask.current.value
-        props.addTask(text)
+        props.dispatch(updateInputTaskAC(text))
     }
     return (
         <div className="inputField">
-            <input type="text" placeholder="Add your new todo" ref={newTextTask}/>
-            <button className={"fas fa-plus"} onClick={addTask}><i >+</i></button>
+            <input type="text" placeholder="Add your new todo" ref={newTextTask} onChange={onInputChange} value={props.taskInput}/>
+            <button className={"fas fa-plus"} onClick={addTask}><i>+</i></button>
         </div>
     )
 }
