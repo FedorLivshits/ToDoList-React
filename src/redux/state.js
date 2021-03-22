@@ -1,16 +1,20 @@
+import todoReducer from "./todo-reducer";
+
 const ADD_TASK = "ADD-TASK"
 const UPDATE_TASK_INPUT = "UPDATE-TASK-INPUT"
 const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 
 let store = {
     state: {
-        tasks: [
-            {id: 1, taskText: 'Написать проект на реакте', isDone: true},
-            {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: true},
-            {id: 3, taskText: 'Систематизировать знания', isDone: false},
-            {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
-        ],
-        taskInput: ""
+        todoPage: {
+            tasks: [
+                {id: 1, taskText: 'Написать проект на реакте', isDone: true},
+                {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: true},
+                {id: 3, taskText: 'Систематизировать знания', isDone: false},
+                {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
+            ],
+            taskInput: ""
+        }
     },
     getState() {
         return this.state
@@ -22,7 +26,7 @@ let store = {
     addTask() {
         let task = {
             id: 5,
-            taskText: this.state.taskInput,
+            taskText: this.state.todoPage.taskInput,
             isDone: false
         }
         this.state.tasks.push(task)
@@ -31,7 +35,7 @@ let store = {
     },
 
     updateTaskInput(text) {
-        this.state.taskInput = text
+        this.state.todoPage.taskInput = text
         this._callSubscriber(this.state)
     },
 
@@ -39,32 +43,13 @@ let store = {
         this._callSubscriber = observer
     },
     dispatch(action) {
-        switch (action.type) {
-            case ADD_TASK:
-                let task = {
-                    id: 5,
-                    taskText: this.state.taskInput,
-                    isDone: false
-                }
-                this.state.tasks.push(task)
-                this.state.taskInput = ""
-                this._callSubscriber(this.state)
-                break
-            case UPDATE_TASK_INPUT:
-                this.state.taskInput = action.text
-                this._callSubscriber(this.state)
-                break
-            case CLEAR_ALL_TASKS:
-                this.state.tasks = []
-                this._callSubscriber(this.state)
-                break
-        }
+        this.state.todoPage = todoReducer(this.state.todoPage, action)
+        this._callSubscriber(this.state)
     }
 }
 
-export const addTaskAC = () => {
-    return {type: ADD_TASK}
-}
+export const addTaskAC = () => ({type: ADD_TASK})
+
 export const updateInputTaskAC = (text) => {
     return {type: UPDATE_TASK_INPUT, text}
 }

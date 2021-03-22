@@ -1,41 +1,35 @@
-const ADD_TASK = 'todo/ADD-TASK';
-const DELETE_TASK = 'todo/DELETE-TASK';
+const ADD_TASK = "ADD-TASK"
+const UPDATE_TASK_INPUT = "UPDATE-TASK-INPUT"
+const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 
 
 let initialState = {
-   tasks: [
-        {id: 1, taskText: 'Написать проект на реакте', isDone: false},
-        {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: false},
-        {id: 3, taskText: 'Систематизировать знания', isDone: false},
-    ],
+    tasks: [],
 }
 
 const todoReducer = (state = initialState, action) => {
-    let stateCopy = {
-        ...state,
-        tasks: [...state.tasks]
-    }
+
     switch (action.type) {
         case ADD_TASK:
-            let newTask = {
-                id: 4,
-                taskText: action.newTaskText,
-                isDone: false,
-            };
-            let text = action.newTaskText;
-            if (text === '') {
-                alert('nothing to send, darling')
-            } else {
-                stateCopy.tasks.push(newTask);
+            let task = {
+                id: 5,
+                taskText: state.taskInput,
+                isDone: false
             }
-            return stateCopy;
+            state.tasks.push(task)
+            state.taskInput = ""
+            return state
+        case UPDATE_TASK_INPUT:
+            state.taskInput = action.text
+            return state
+        case CLEAR_ALL_TASKS:
+            state.tasks = []
+            return state
         default:
             return state
-
     }
 }
 
-export const addTaskAC = (newTaskText) => ({type: ADD_TASK, newTaskText});
-
+export const addTaskAC = () => ({type: ADD_TASK})
 
 export default todoReducer;
