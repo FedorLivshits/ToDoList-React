@@ -1,10 +1,9 @@
 import React from "react";
-import {clearAllTasksAC} from "../../../redux/todo-reducer";
 
 
 function Footer(props) {
-    let clearAll = () => {
-        props.dispatch(clearAllTasksAC())
+    let onClearAll = () => {
+        props.clearAlltasks()
     }
     return (
         <div className="footer">
@@ -13,7 +12,7 @@ function Footer(props) {
                 <li><a href="#">In progress</a></li>
                 <li><a href="#">Done</a></li>
             </ul>
-            <button onClick={clearAll}>Clear All</button>
+            <button onClick={onClearAll}>Clear All</button>
         </div>
     )
 }

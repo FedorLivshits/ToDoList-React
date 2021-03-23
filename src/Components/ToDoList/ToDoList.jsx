@@ -2,6 +2,7 @@ import React from "react";
 import Task from "./Task/Task";
 import Footer from "./Footer/Footer";
 import ToDoInputContainer from "./ToDoInput/ToDoInputContainer";
+import FooterContainer from "./Footer/FooterContainer";
 
 
 function ToDoList(props) {
@@ -14,7 +15,7 @@ function ToDoList(props) {
             <ul className="todoList">
                 {tasksElements}
             </ul>
-            <Footer dispatch={props.store.dispatch}/>
+            <FooterContainer store={props.store}/>
         </div>
 
     )
