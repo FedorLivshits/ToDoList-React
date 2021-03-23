@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     addTaskAC,
-} from "../redux/todo-reducer";
+} from "../../redux/todo-reducer";
 import ToDoList from "./ToDoList";
 import {connect} from "react-redux";
 
