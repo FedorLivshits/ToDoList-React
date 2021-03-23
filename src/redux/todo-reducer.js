@@ -1,5 +1,3 @@
-import store from "./store";
-
 const ADD_TASK = "ADD-TASK"
 const UPDATE_TASK_INPUT = "UPDATE-TASK-INPUT"
 const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
@@ -7,7 +5,13 @@ const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 let todoId = 5;
 
 let initialState = {
-    tasks: [],
+        tasks: [
+            {id: 1, taskText: 'Написать проект на реакте', isDone: true},
+            {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: true},
+            {id: 3, taskText: 'Систематизировать знания', isDone: false},
+            {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
+        ],
+        taskInputText: ""
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -21,14 +25,14 @@ const todoReducer = (state = initialState, action) => {
         case ADD_TASK:
             let task = {
                 id: todoId++,
-                taskText: state.taskInput,
+                taskText: state.taskInputText,
                 isDone: false
             }
             state.tasks.push(task)
-            state.taskInput = ""
+            state.taskInputText = ""
             return state
         case UPDATE_TASK_INPUT:
-            state.taskInput = action.text
+            state.taskInputText = action.text
             return state
         case CLEAR_ALL_TASKS:
             state.tasks = []

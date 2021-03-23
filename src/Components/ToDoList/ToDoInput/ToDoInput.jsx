@@ -1,17 +1,18 @@
 import React from "react";
-import {addTaskAC, updateInputTaskAC} from "../../../redux/todo-reducer";
+
 
 function ToDoInput(props) {
+    debugger
     let addTask = () => {
-        props.dispatch(addTaskAC())
+        props.addTask()
     }
     let onInputChange = (event) => {
         let text = event.target.value
-        props.dispatch(updateInputTaskAC(text))
+        props.updateInputTask(text)
     }
     return (
         <div className="inputField">
-            <input type="text" placeholder="Add your new todo" onChange={onInputChange} value={props.taskInput}/>
+            <input type="text" placeholder="Add your new todo" onChange={onInputChange} value={props.taskInputText}/>
             <button className={"fas fa-plus"} onClick={addTask}><i>+</i></button>
         </div>
     )
