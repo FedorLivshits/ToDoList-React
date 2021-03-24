@@ -1,6 +1,5 @@
 import React from "react";
 import Task from "./Task/Task";
-import Footer from "./Footer/Footer";
 import ToDoInputContainer from "./ToDoInput/ToDoInputContainer";
 import FooterContainer from "./Footer/FooterContainer";
 

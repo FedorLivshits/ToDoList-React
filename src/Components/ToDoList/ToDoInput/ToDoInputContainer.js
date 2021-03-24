@@ -1,15 +1,23 @@
 import React from "react";
 import {addTaskAC, updateInputTaskAC} from "../../../redux/todo-reducer";
 import ToDoInput from "./ToDoInput";
+import {connect} from "react-redux";
 
-function ToDoInputContainer(props) {
-    let addTask = () => {
-        props.store.dispatch(addTaskAC())
+let mapStateToProps = (state) => {
+    return {
+        todoPage: state.todoPage,
     }
-    let onInputChange = (text) => {
-        props.store.dispatch(updateInputTaskAC(text))
-    }
-    return ( <ToDoInput addTask={addTask} updateInputTask={onInputChange} taskInputText={props.store.getState().todoPage.taskInputText}/> )
 }
+let mapDispatchToProps = (dispatch) => {
+    return {
+        addTask: () => {
+            dispatch(addTaskAC());
+        },
+        updateInputTask: (text) => {
+            dispatch(updateInputTaskAC(text));
+        }
+    }
+}
+const ToDoInputContainer = connect(mapStateToProps, mapDispatchToProps)(ToDoInput)
 
-export default ToDoInputContainer;
+export default ToDoInputContainer

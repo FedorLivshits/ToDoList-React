@@ -5,13 +5,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {Provider} from "react-redux";
 
 
 function rerenderEntireTree() {
     ReactDOM.render(
-        <React.StrictMode>
-            <App store={store}/>
-        </React.StrictMode>,
+        <Provider store={store}>
+                <App store={store}/>
+        </Provider>,
         document.getElementById('root')
     );
 }
