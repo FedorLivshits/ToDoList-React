@@ -1,17 +1,19 @@
 const ADD_TASK = "ADD-TASK"
 const UPDATE_TASK_INPUT = "UPDATE-TASK-INPUT"
 const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
+const TASK_COMPLETED = "TASK-COMPLETED"
+const TASK_UNCOMPLETED = "TASK-UNCOMPLETED"
 
 let todoId = 5;
 
 let initialState = {
-        tasks: [
-            {id: 1, taskText: 'Написать проект на реакте', isDone: true},
-            {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: true},
-            {id: 3, taskText: 'Систематизировать знания', isDone: false},
-            {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
-        ],
-        taskInputText: ""
+    tasks: [
+        {id: 1, taskText: 'Написать проект на реакте', isDone: true},
+        {id: 2, taskText: 'Дополнить гитхаб профиль', isDone: true},
+        {id: 3, taskText: 'Систематизировать знания', isDone: false},
+        {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
+    ],
+    taskInputText: ""
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -28,15 +30,41 @@ const todoReducer = (state = initialState, action) => {
                 taskText: state.taskInputText,
                 isDone: false
             }
-            state.tasks.push(task)
-            state.taskInputText = ""
-            return state
+            return {
+                ...state,
+                tasks: [...state.tasks, task],
+                taskInputText: ""
+            }
         case UPDATE_TASK_INPUT:
-            state.taskInputText = action.text
-            return state
+            return {
+                ...state,
+                taskInputText: action.text
+            }
         case CLEAR_ALL_TASKS:
-            state.tasks = []
-            return state
+            return{
+                ...state,
+                tasks: []
+            }
+        case TASK_COMPLETED:
+            return {
+                ...state,
+                tasks: state.tasks.map(t => {
+                    if(t.id === action.taskId){
+                        return {...t, isDone: true}
+                    }
+                  return  t
+                })
+            }
+        case TASK_UNCOMPLETED:
+            return{
+                ...state,
+                tasks: state.tasks.map(t => {
+                    if(t.id === action.taskId){
+                        return {...t, isDone: false}
+                    }
+                    return t
+                })
+            }
         default:
             return state
     }
@@ -53,6 +81,8 @@ export const clearAllTasksAC = () => {
         type: CLEAR_ALL_TASKS
     }
 }
+export const taskCompletedAC = (taskId) => ({type: TASK_COMPLETED, taskId})
+export const taskUncompletedAC = (taskId) => ({type: TASK_UNCOMPLETED, taskId})
 
 
 export default todoReducer;

@@ -1,14 +1,25 @@
 import React from "react";
 import {clearAllTasksAC} from "../../../redux/todo-reducer";
 import Footer from "./Footer";
+import {connect} from "react-redux";
 
-
-function FooterContainer(props) {
-    let clearAll = () => {
-        props.store.dispatch(clearAllTasksAC())
+const mapStateToProps = (state) => {
+    return {
+        undefined
     }
-    return ( <Footer clearAlltasks={clearAll}/> )
+
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearAllTasks: (text) => {
+            dispatch(clearAllTasksAC(text));
+        }
+    }
+
+}
+
+
+const FooterContainer = connect(mapStateToProps, mapDispatchToProps)(Footer)
 
 export default FooterContainer;
 

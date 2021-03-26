@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        todoPage: state.todoPage,
+        taskInputText: state.todoPage.taskInputText
     }
 }
 let mapDispatchToProps = (dispatch) => {
