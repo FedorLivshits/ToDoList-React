@@ -2,8 +2,7 @@ import React from "react";
 
 
 function Footer(props) {
-    debugger
-    let onClearAll = () => {
+        let onClearAll = () => {
         props.clearAllTasks()
     }
     return (
