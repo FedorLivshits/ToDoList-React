@@ -2,11 +2,15 @@ import React from "react";
 
 function Task(props) {
     return (
-        <li>
-            <input className="input_checkbox" type="checkbox" checked={props.isDone} onClick={props.isDone ? props.unCompleteTask : props.completeTask}/>
-          <div className="task__text">{props.taskText}</div>
-        </li>
+        props.tasks.map(t => <li>
+            <input className="input_checkbox" type="checkbox" checked={t.isDone}
+                   onClick={t.isDone ? () => props.unCompleteTask(t.id) : () => props.completeTask(t.id)}/>
+            <div className="task__text">{t.taskText}</div>
+        </li>)
+
     )
 }
 
+
 export default Task
+

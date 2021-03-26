@@ -10,11 +10,11 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        completeTask: () => {
-            dispatch(taskCompletedAC());
+        completeTask: (taskId) => {
+            dispatch(taskCompletedAC(taskId));
         },
-        unCompleteTask: () => {
-            dispatch(taskUncompletedAC())
+        unCompleteTask: (taskId) => {
+            dispatch(taskUncompletedAC(taskId))
         }
     }
 }
