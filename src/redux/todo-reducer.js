@@ -4,6 +4,10 @@ const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 const TASK_COMPLETED = "TASK-COMPLETED"
 const TASK_UNCOMPLETED = "TASK-UNCOMPLETED"
 const DELETE_TASK = "DELETE-TASK"
+const All_TASKS = "All_TASKS"
+const IN_PROGRESS = "IN_PROGRESS"
+const DONE = "DONE"
+
 
 let todoId = 5;
 
@@ -14,7 +18,13 @@ let initialState = {
         {id: 3, taskText: 'Систематизировать знания', isDone: false},
         {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
     ],
-    taskInputText: ""
+    taskInputText: "",
+    filter: [
+        {id: 1, view: "all"},
+        {id: 2, view: "in-progress"},
+        {id: 3, view: "done"}
+
+    ]
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -72,6 +82,21 @@ const todoReducer = (state = initialState, action) => {
                 ...state,
                 tasks: state.tasks.filter(t => t.id !== action.taskId)
             }
+        case All_TASKS:
+            return{
+                ...state,
+                tasks: state.tasks.filter(t => t)
+            }
+        case IN_PROGRESS:
+            return{
+                ...state,
+                tasks: state.tasks.filter(t => !t.isDone)
+            }
+        case DONE:
+            return{
+                ...state,
+                tasks: state.tasks.filter(t => t.isDone)
+            }
         default:
             return state
     }
@@ -91,6 +116,10 @@ export const clearAllTasksAC = () => {
 export const taskCompletedAC = (taskId) => ({type: TASK_COMPLETED, taskId})
 export const taskUncompletedAC = (taskId) => ({type: TASK_UNCOMPLETED, taskId})
 export const deleteTaskAC = (taskId) => ({type: DELETE_TASK, taskId})
+
+export const allTasksFilterAC = (id) => ({type: All_TASKS, id})
+export const inProgressFilterAC = (id) => ({type: IN_PROGRESS, id})
+export const doneFilterAC = (id) => ({type: DONE, id})
 
 
 export default todoReducer;
