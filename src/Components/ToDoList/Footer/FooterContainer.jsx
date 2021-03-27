@@ -3,12 +3,6 @@ import {clearAllTasksAC} from "../../../redux/todo-reducer";
 import Footer from "./Footer";
 import {connect} from "react-redux";
 
-const mapStateToProps = (state) => {
-    return {
-        undefined
-    }
-
-}
 const mapDispatchToProps = (dispatch) => {
     return {
         clearAllTasks: (text) => {
@@ -19,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-const FooterContainer = connect(mapStateToProps, mapDispatchToProps)(Footer)
+const FooterContainer = connect(undefined, mapDispatchToProps)(Footer)
 
 export default FooterContainer;
 

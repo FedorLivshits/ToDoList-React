@@ -1,8 +1,7 @@
 import React from "react";
-import Task from "./Task/Task";
-import ToDoInputContainer from "./ToDoInput/ToDoInputContainer";
 import FooterContainer from "./Footer/FooterContainer";
 import TaskContainer from "./Task/TaskContainer";
+import ToDoInputContainer from "./ToDoInput/ToDoInputContainer.jsx";
 
 
 function ToDoList(props) {
