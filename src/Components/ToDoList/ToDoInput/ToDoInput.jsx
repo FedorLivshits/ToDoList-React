@@ -9,15 +9,11 @@ function ToDoInput(props) {
         let text = event.target.value
         props.updateInputTask(text)
     }
-  let disable = () =>{
-      if(props.taskInputText === ""){
-          return false
-      }
-  }
+
     return (
         <div className="inputField">
             <input type="text" placeholder="Add your new todo" onChange={onInputChange} value={props.taskInputText}/>
-            <button className={"fas fa-plus"} onClick={addTask}><i>+</i></button>
+            <button className={"fas fa-plus"} onClick={addTask} disabled={props.taskInputText == ""}><i>+</i></button>
         </div>
     )
 }
