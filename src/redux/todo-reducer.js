@@ -3,6 +3,7 @@ const UPDATE_TASK_INPUT = "UPDATE-TASK-INPUT"
 const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 const TASK_COMPLETED = "TASK-COMPLETED"
 const TASK_UNCOMPLETED = "TASK-UNCOMPLETED"
+const DELETE_TASK = "DELETE-TASK"
 
 let todoId = 5;
 
@@ -17,6 +18,7 @@ let initialState = {
 }
 
 const todoReducer = (state = initialState, action) => {
+    debugger
 
     // if(state.tasks.length){
     //     let todoId = 5;
@@ -60,10 +62,15 @@ const todoReducer = (state = initialState, action) => {
                 ...state,
                 tasks: state.tasks.map(t => {
                     if(t.id === action.taskId){
-                        return {...t, isDone: false}
+                        return false
                     }
                     return t
                 })
+            }
+        case DELETE_TASK:
+            return{
+                ...state,
+                tasks: state.tasks.filter(t => t.id !== action.taskId)
             }
         default:
             return state
@@ -83,6 +90,7 @@ export const clearAllTasksAC = () => {
 }
 export const taskCompletedAC = (taskId) => ({type: TASK_COMPLETED, taskId})
 export const taskUncompletedAC = (taskId) => ({type: TASK_UNCOMPLETED, taskId})
+export const deleteTaskAC = (taskId) => ({type: DELETE_TASK, taskId})
 
 
 export default todoReducer;

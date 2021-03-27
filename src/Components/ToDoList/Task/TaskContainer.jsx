@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Task from "./Task";
-import {taskCompletedAC, taskUncompletedAC} from "../../../redux/todo-reducer";
+import {deleteTaskAC, taskCompletedAC, taskUncompletedAC} from "../../../redux/todo-reducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -15,6 +15,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         unCompleteTask: (taskId) => {
             dispatch(taskUncompletedAC(taskId))
+        },
+        deleteTask: (taskId) => {
+            dispatch(deleteTaskAC(taskId))
         }
     }
 }
