@@ -28,39 +28,16 @@ let initialState = {
 }
 
 const todoReducer = (state = initialState, action) => {
-    debugger
-
-    // if(state.tasks.length){
-    //     let todoId = 5;
-    // }else {
-    //     let todoId = 0
-    // }
     switch (action.type) {
         case ADD_TASK:
-            let task = {
-                id: todoId++,
-                taskText: state.taskInputText,
-                isDone: false
-            }
-            return {
-                ...state,
-                tasks: [...state.tasks, task],
-                taskInputText: ""
-            }
+            let task = {id: todoId++, taskText: state.taskInputText, isDone: false}
+            return {...state, tasks: [...state.tasks, task], taskInputText: ""}
         case UPDATE_TASK_INPUT:
-            return {
-                ...state,
-                taskInputText: action.text
-            }
+            return {...state, taskInputText: action.text}
         case CLEAR_ALL_TASKS:
-            return{
-                ...state,
-                tasks: []
-            }
+            return{...state, tasks: []}
         case TASK_COMPLETED:
-            return {
-                ...state,
-                tasks: state.tasks.map(t => {
+            return {...state, tasks: state.tasks.map(t => {
                     if(t.id === action.taskId){
                         return {...t, isDone: true}
                     }
@@ -68,55 +45,32 @@ const todoReducer = (state = initialState, action) => {
                 })
             }
         case TASK_UNCOMPLETED:
-            return{
-                ...state,
-                tasks: state.tasks.map(t => {
+            return{...state, tasks: state.tasks.map(t => {
                     if(t.id === action.taskId){
-                        return false
+                        return {...t, isDone: false}
                     }
                     return t
                 })
             }
         case DELETE_TASK:
-            return{
-                ...state,
-                tasks: state.tasks.filter(t => t.id !== action.taskId)
-            }
+            return{...state, tasks: state.tasks.filter(t => t.id !== action.taskId)}
         case All_TASKS:
-            return{
-                ...state,
-                tasks: state.tasks.filter(t => t)
-            }
+            return{...state, tasks: state.tasks.filter(t => t)}
         case IN_PROGRESS:
-            return{
-                ...state,
-                tasks: state.tasks.filter(t => !t.isDone)
-            }
+            return{...state, tasks: state.tasks.filter(t => !t.isDone)}
         case DONE:
-            return{
-                ...state,
-                tasks: state.tasks.filter(t => t.isDone)
-            }
+            return{...state, tasks: state.tasks.filter(t => t.isDone)}
         default:
             return state
     }
 }
 
 export const addTaskAC = () => ({type: ADD_TASK})
-
-export const updateInputTaskAC = (text) => {
-    return {type: UPDATE_TASK_INPUT, text}
-}
-
-export const clearAllTasksAC = () => {
-    return {
-        type: CLEAR_ALL_TASKS
-    }
-}
+export const updateInputTaskAC = (text) => ({type: UPDATE_TASK_INPUT, text})
+export const clearAllTasksAC = () => ({ type: CLEAR_ALL_TASKS})
 export const taskCompletedAC = (taskId) => ({type: TASK_COMPLETED, taskId})
 export const taskUncompletedAC = (taskId) => ({type: TASK_UNCOMPLETED, taskId})
 export const deleteTaskAC = (taskId) => ({type: DELETE_TASK, taskId})
-
 export const allTasksFilterAC = (id) => ({type: All_TASKS, id})
 export const inProgressFilterAC = (id) => ({type: IN_PROGRESS, id})
 export const doneFilterAC = (id) => ({type: DONE, id})
