@@ -4,7 +4,6 @@ const All_TASKS = "All_TASKS"
 const IN_PROGRESS = "IN_PROGRESS"
 const DONE = "DONE"
 
-
 let initialState = {
     filter: [
         {id: 1, view: "all"},
@@ -17,11 +16,11 @@ let initialState = {
 export const filterReducer = (state = initialState, action) =>{
     switch (action.type) {
         case All_TASKS:
-        return{
-            ...state
-        }
+            return{...state, tasks: state.tasks.filter(t => t)}
         case IN_PROGRESS:
+            return{...state, tasks: state.tasks.filter(t => !t.isDone)}
         case DONE:
+            return{...state, tasks: state.tasks.filter(t => t.isDone)}
         default:
             return state
 

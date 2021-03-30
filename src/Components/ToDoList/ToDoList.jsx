@@ -4,7 +4,7 @@ import TaskContainer from "./Task/TaskContainer";
 import ToDoInputContainer from "./ToDoInput/ToDoInputContainer.jsx";
 
 
-function ToDoList(props) {
+function ToDoList() {
     return (
         <div className="wrapper">
             <header>Todo App</header>
