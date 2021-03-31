@@ -52,7 +52,7 @@ function Footer({clearAllTasks, changeFilter, activeFilter, tasks}) {
                         >{text}</a></li>
                     ))}
                 </ul>
-                <button onClick={onClearAll}>Clear All</button>
+                <button onClick={onClearAll}  disabled={tasks.length === 0}>Clear All</button>
             </div>
             <div className="active-tasks__counter">{amount(activeFilter)}</div>
         </>

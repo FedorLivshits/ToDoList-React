@@ -13,7 +13,7 @@ function ToDoInput({taskInputText, addTask, updateInputTask}) {
     return (
         <div className="inputField">
             <input type="text" placeholder="Add your new todo" onChange={onInputChange} value={taskInputText}/>
-            <button className={""} onClick={addNewTask} onKeyPress={() => addNewTask()}
+            <button  onClick={addNewTask} onKeyPress={() => addNewTask()}
                     disabled={taskInputText.length === 0}><i>+</i></button>
         </div>
     )
