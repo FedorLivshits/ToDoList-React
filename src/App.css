@@ -197,6 +197,10 @@ ul.breadcrumb li a.filter-btn:hover {
     text-decoration: underline;
 }
 
+.active-tasks__counter{
+    margin-top: 25px;
+    text-align: center;
+}
 /*----------------scroll---------------*/
 ::-webkit-scrollbar {
     height: 16px;

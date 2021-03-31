@@ -19,7 +19,22 @@ function Footer({clearAllTasks, changeFilter, activeFilter, tasks}) {
     let onClearAll = () => {
         clearAllTasks()
     }
-    const amount = () => {
+
+    const amount = (activeFilter) => {
+        switch (activeFilter) {
+            case 'all': {
+                let allTasks = tasks.filter(task => task)
+                return ("All tasks: " + allTasks.length)
+            }
+            case'in progress': {
+                let activeTasks = tasks.filter(task => !task.isDone)
+                return ("In progress tasks: " + activeTasks.length)
+            }
+            case 'done':   {
+                let doneTasks = tasks.filter(task => task.isDone)
+                return ("Done tasks: " + doneTasks.length)
+            }
+        }
         let activeTasks = tasks.filter(task => !task.isDone)
         return activeTasks.length
     }
@@ -39,7 +54,7 @@ function Footer({clearAllTasks, changeFilter, activeFilter, tasks}) {
                 </ul>
                 <button onClick={onClearAll}>Clear All</button>
             </div>
-            <div className="active-tasks__counter">Активных задач: {amount()}</div>
+            <div className="active-tasks__counter">{amount(activeFilter)}</div>
         </>
     )
 }
