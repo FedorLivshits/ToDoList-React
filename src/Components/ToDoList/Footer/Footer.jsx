@@ -1,15 +1,35 @@
 import React from "react";
 
-function Footer({clearAllTasks}) {
-        let onClearAll = () => {
+function Footer({clearAllTasks, changeFilter, activeFilter}) {
+    const FILTERS_BTN = [
+        {
+            text: 'All',
+            id: 'all',
+        },
+        {
+            text: 'In progress',
+            id: 'in progress',
+        },
+        {
+            text: 'Done',
+            id: 'done'
+        }
+    ];
+
+    let onClearAll = () => {
         clearAllTasks()
     }
     return (
         <div className="footer">
             <ul className="breadcrumb">
-                <li><a >All</a></li>
-                <li><a >In progress</a></li>
-                <li><a >Done</a></li>
+                {FILTERS_BTN.map(({text, id}) => (
+                    <li><a
+                        onClick={() => {
+                            changeFilter(id)}}
+                        key={id}
+                        className={id === activeFilter ? "active" : 'filter-btn'}
+                    >{text}</a></li>
+                ))}
             </ul>
             <button onClick={onClearAll}>Clear All</button>
         </div>

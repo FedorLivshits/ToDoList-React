@@ -1,18 +1,21 @@
 import React from "react";
 import FooterContainer from "./Footer/FooterContainer";
-import TaskContainer from "./Task/TaskContainer";
+import TasksContainer from "./Task/TasksContainer";
 import ToDoInputContainer from "./ToDoInput/ToDoInputContainer.jsx";
+import {connect} from "react-redux";
+import Footer from "./Footer/Footer";
 
 
-function ToDoList() {
+function ToDoList(props) {
+
     return (
         <div className="wrapper">
             <header>Todo App</header>
             <ToDoInputContainer />
             <ul className="todoList">
-                <TaskContainer/>
+                <TasksContainer tasksList={props.tasksList}/>
             </ul>
-            <FooterContainer/>
+            <FooterContainer  />
         </div>
 
     )

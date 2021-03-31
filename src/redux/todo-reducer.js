@@ -4,14 +4,6 @@ const CLEAR_ALL_TASKS = "CLEAR-ALL-TASKS"
 const TASK_COMPLETED = "TASK-COMPLETED"
 const TASK_UNCOMPLETED = "TASK-UNCOMPLETED"
 const DELETE_TASK = "DELETE-TASK"
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-export const VisibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE'
-}
-const { SHOW_ALL } = VisibilityFilters
-
 
 
 let todoId = 5;
@@ -24,18 +16,8 @@ let initialState = {
         {id: 4, taskText: 'Виджет погоды с запросом на сервер', isDone: false},
     ],
     taskInputText: "",
-    visibilityFilter: VisibilityFilters.SHOW_ALL,
-}
 
-function visibilityFilter(state = SHOW_ALL, action) {
-    switch (action.type) {
-        case SET_VISIBILITY_FILTER:
-            return action.filter
-        default:
-            return state
-    }
 }
-
 
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -76,8 +58,6 @@ export const clearAllTasksAC = () => ({ type: CLEAR_ALL_TASKS})
 export const taskCompletedAC = (taskId) => ({type: TASK_COMPLETED, taskId})
 export const taskUncompletedAC = (taskId) => ({type: TASK_UNCOMPLETED, taskId})
 export const deleteTaskAC = (taskId) => ({type: DELETE_TASK, taskId})
-export function setVisibilityFilterAC(filter) {
-    return { type: SET_VISIBILITY_FILTER, filter }
-}
 
 export default todoReducer;
+

@@ -1,8 +1,9 @@
 import React from "react";
 
-function Task({tasks, unCompleteTask, completeTask, deleteTask}) {
+function Tasks({tasksList, unCompleteTask, completeTask, deleteTask}) {
+    debugger
     return (
-        tasks.map(t => <li>
+        tasksList.tasksList.map(t => <li>
             <input className="input_checkbox" type="checkbox" checked={t.isDone}
                    onClick={t.isDone ? () => unCompleteTask(t.id) : () => completeTask(t.id)}/>
             <div className={t.isDone ? "task__text  done" : "task__text"}>{t.taskText}</div>
@@ -13,5 +14,5 @@ function Task({tasks, unCompleteTask, completeTask, deleteTask}) {
 }
 
 
-export default Task
+export default Tasks
 

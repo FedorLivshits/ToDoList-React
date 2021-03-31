@@ -1,34 +1,20 @@
-import todoReducer from "./todo-reducer";
-
-const All_TASKS = "All_TASKS"
-const IN_PROGRESS = "IN_PROGRESS"
-const DONE = "DONE"
+const CHANGE_FILTER = 'my-app/ToDo-reducer/CHANGE_FILTER';
 
 let initialState = {
-    filter: [
-        {id: 1, view: "all"},
-        {id: 2, view: "in-progress"},
-        {id: 3, view: "done"}
-
-    ]
+    activeFilter: 'all'
 }
 
-export const filterReducer = (state = initialState, action) =>{
-    switch (action.type) {
-        case All_TASKS:
-            return{...state, tasks: state.tasks.filter(t => t)}
-        case IN_PROGRESS:
-            return{...state, tasks: state.tasks.filter(t => !t.isDone)}
-        case DONE:
-            return{...state, tasks: state.tasks.filter(t => t.isDone)}
+const filterReducer = (state = initialState, { type, activeFilter }) => {
+    switch (type) {
+        case CHANGE_FILTER: {
+            return {activeFilter: activeFilter};
+        }
         default:
-            return state
-
+            return state;
     }
 }
 
-export const allTasksFilterAC = (id) => ({type: All_TASKS, id})
-export const inProgressFilterAC = (id) => ({type: IN_PROGRESS, id})
-export const doneFilterAC = (id) => ({type: DONE, id})
+export const changeFilterAC = (activeFilter) => ({type: CHANGE_FILTER, activeFilter});
 
 export default filterReducer;
+

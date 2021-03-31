@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import Task from "./Task";
 import {deleteTaskAC, taskCompletedAC, taskUncompletedAC} from "../../../redux/todo-reducer";
+import Tasks from "./Tasks";
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state, ownProps) => {
     return {
-        tasks: state.todoPage.tasks,
+        tasksList: ownProps
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -21,6 +21,6 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
-const TaskContainer = connect(mapStateToProps, mapDispatchToProps)(Task)
+const TasksContainer = connect(mapStateToProps, mapDispatchToProps)(Tasks)
 
-export default TaskContainer
+export default TasksContainer
