@@ -16,9 +16,14 @@ const ToDoListContainer = (props) => {
         }
     }
     const filteredTasks = filterTasks(props.tasks, props.activeFilter);
+    const amount = () => {
+        let activeTasks = props.tasks.filter(task => !task.isDone)
+        return activeTasks.length
+    }
+
     return (
         <ToDoList tasksList={filteredTasks} changeFilter={props.changeFilter} clearAllTasks={props.clearAllTasks}
-                  activeFilter={props.activeFilter}/>
+                  activeFilter={props.activeFilter} amount={amount}/>
     )
 }
 

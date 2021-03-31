@@ -9,7 +9,8 @@ import {changeFilterAC} from "../../../redux/filter-reducer";
 const mapStateToProps = (state) => {
     return (
         {
-            activeFilter: state.ToDoFilter.activeFilter
+            activeFilter: state.ToDoFilter.activeFilter,
+            tasks: state.todoPage.tasks
         }
     )
 }
